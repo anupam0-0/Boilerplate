@@ -4,6 +4,7 @@ export interface IUser extends Document {
     fullName: string
 	email: string;
 	password: string;
+	googleProfileID: string;
 	role: "user" | "admin";
 }
 
@@ -20,6 +21,9 @@ const userSchema = new Schema<IUser>({
 	password: {
 		type: String,
 		required: true,
+	},
+	googleProfileID: {
+		type: String,
 	},
     role: {
         type: String,

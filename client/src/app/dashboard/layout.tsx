@@ -1,5 +1,5 @@
 
-import RestrictedLayout from "@/utils/layouts/RestrictedLayout";
+import RestrictedLayout from "@/utils/layouts/ProtectedLayout";
 
 export default function DashboardLayout({
     children,

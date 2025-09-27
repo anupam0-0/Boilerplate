@@ -41,7 +41,7 @@ exports.login = login;
 exports.logout = logout;
 exports.getProfile = getProfile;
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const userService = __importStar(require("../services/user.service"));
+const userService = __importStar(require("../services/auth.service"));
 const hashPassword_1 = require("../../utils/hashPassword");
 async function register(req, res) {
     try {

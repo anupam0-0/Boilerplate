@@ -45,6 +45,7 @@ export function LoginForm({
 
     try {
       const response = await login(formData);
+      console.log(response);
       if (response.data.user) {
         setUser(response.data.user);
         router.push("/dashboard");

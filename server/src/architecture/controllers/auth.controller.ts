@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
-import * as userService from "../services/user.service";
+import * as userService from "../services/auth.service";
 import { comparePassword } from "../../utils/hashPassword";
 import { setAuthCookie, clearAuthCookie } from "../../utils/cookieUtils";
 import {
@@ -12,7 +12,7 @@ import {
 
 export async function register(req: Request, res: Response): Promise<void> {
   try {
-    const { email, password, fullName } = req.body;
+    const {fullName, email, password } = req.body;
 
     // Validate required fields using a service function
     const missingFieldsError = validateRegisterFields({
@@ -26,14 +26,14 @@ export async function register(req: Request, res: Response): Promise<void> {
     }
 
     // Validate email format using a util function
-    const validEmailError = isValidEmail(email);
-    if (validEmailError) {
-      res.status(400).json(validEmailError);
-      return;
-    }
+    // const validEmailError = isValidEmail(email);
+    // if (validEmailError) {
+    //   res.status(400).json(validEmailError);
+    //   return;
+    // }
 
     // Validate password length using a util function
-    const validPasswordError = isValidPassword(password);
+    const validPasswordError = isValidPassword({password});
     if (validPasswordError) {
       res.status(400).json(validPasswordError);
       return;
@@ -53,9 +53,9 @@ export async function register(req: Request, res: Response): Promise<void> {
       {
         user: {
           id: user._id,
-          name: user.fullName,
+          fullName: user.fullName,
           email: user.email,
-          role: user._id,
+          role: user.role,
         },
       },
       process.env.JWT_SECRET || "fallback-secret",
@@ -116,7 +116,7 @@ export async function login(req: Request, res: Response): Promise<void> {
       {
         user: {
           id: user._id,
-          name: user.fullName,
+          fullName: user.fullName,
           email: user.email,
           role: user.role,
         },
@@ -151,16 +151,17 @@ export async function logout(req: Request, res: Response): Promise<void> {
 export async function getProfile(req: Request, res: Response): Promise<void> {
   try {
     const user = req.user;
-	console.log(user)
+    // console.log(user);
     if (!user) {
       res.status(401).json({ message: "User not found" });
       return;
     }
-
+	console.log(user);
     res.json({
       user: {
-        id: user._id,
+        id: user.id,
         name: user.fullName,
+        email: user.email,
         role: user.role,
       },
     });

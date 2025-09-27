@@ -3,9 +3,16 @@
 import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/features/auth/hooks/useAuth";
-import Link from 'next/link'
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 const HomePage = () => {
   const { isAuthenticated, user } = useAuth();
@@ -33,9 +40,7 @@ const HomePage = () => {
         <Card>
           <CardHeader className="text-center">
             <CardTitle className="text-2xl">Welcome!</CardTitle>
-            <CardDescription>
-              Get started with your account
-            </CardDescription>
+            <CardDescription>Get started with your account</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             <Button asChild className="w-full">
@@ -46,7 +51,9 @@ const HomePage = () => {
             </Button>
           </CardContent>
           <CardFooter>
-          <Link href="/dashboard">Sahboard</Link>
+            <Button variant="secondary" className="w-full">
+              <Link href="/dashboard">Dashboard</Link>
+            </Button>
           </CardFooter>
         </Card>
       </div>

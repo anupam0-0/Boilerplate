@@ -46,6 +46,7 @@ export function RegisterForm({
 
     try {
       const response = await register(formData);
+      console.log(response)
       if (response.data.user) {
         setUser(response.data.user);
         router.push("/dashboard");

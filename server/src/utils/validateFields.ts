@@ -44,9 +44,12 @@ export function isValidEmail({ email }: { email: string }) {
 }
 
 export function isValidPassword({ password }: { password: string }) {
-  return password && password.length >= 6 && password.length <= 32 ? null : {
-    message: "Invalid password length",
-    error: "Password must be between 6 and 32 characters long",
-  };
-  return null
+    console.log(password)
+  if (!password || password.length < 6 || password.length > 32) {
+    return {
+      message: `Invalid password length, ${password.length}`,
+      error: "Password must be between 6 and 32 characters long",
+    };
+  }
+  return null;
 }
