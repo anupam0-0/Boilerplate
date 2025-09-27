@@ -1,13 +1,14 @@
 
+import AuthLayout from "@/utils/layouts/AuthLayout";
 
-export default function RootLayout({
+export default function RegisterLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <div>
+        <AuthLayout>
             {children}
-        </div>
+        </AuthLayout>
     );
 }

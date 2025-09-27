@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ThemeProvider } from "@/components/theme-provider"
 import { ModeToggle } from "@/components/mode-toggle";
+import { AuthProvider } from "@/components/auth-provider";
 
 
 const geistSans = Geist({
@@ -36,10 +37,12 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          <div className="fixed bottom-5 right-5" >
-            <ModeToggle />
-          </div>
-          {children}
+          <AuthProvider>
+            <div className="fixed bottom-5 right-5" >
+              <ModeToggle />
+            </div>
+            {children}
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

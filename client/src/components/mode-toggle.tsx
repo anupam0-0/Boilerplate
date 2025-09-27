@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button"
 
 export function ModeToggle() {
     const { theme, setTheme } = useTheme()
-    console.log(theme)
+    // console.log(theme)
 
     return (
         <div className="relative" >

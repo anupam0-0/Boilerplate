@@ -1,13 +1,16 @@
 
+import RestrictedLayout from "@/utils/layouts/RestrictedLayout";
 
-export default function RootLayout({
+export default function DashboardLayout({
     children,
 }: Readonly<{
     children: React.ReactNode;
 }>) {
     return (
-        <div>
-            {children}
-        </div>
+        <RestrictedLayout>
+            <div>
+                {children}
+            </div>
+        </RestrictedLayout>
     );
 }

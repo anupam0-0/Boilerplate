@@ -1,17 +1,57 @@
-import Link from 'next/link'
-import React from 'react'
+"use client";
 
-const page = () => {
+import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "@/features/auth/hooks/useAuth";
+import Link from 'next/link'
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card";
+
+const HomePage = () => {
+  const { isAuthenticated, user } = useAuth();
+  const router = useRouter();
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      router.push("/dashboard");
+    }
+  }, [isAuthenticated, router]);
+
+  if (isAuthenticated()) {
+    return (
+      <div className="flex min-h-screen items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-lg font-semibold">Redirecting to dashboard...</h2>
+        </div>
+      </div>
+    );
+  }
+
   return (
-    <div className='flex flex-col gap-6 p-10'>
-      <h1 className='text-4xl font-semibold'>This is Main...</h1>
-      <div>
-        <p>Go to <Link className='text-blue-500' href="/register">register</Link></p>
-        <p>Go to <Link className='text-blue-500' href="/login">login</Link></p>
-        <p>Go to <Link className='text-blue-500' href="/dashboard" >Dashboard</Link></p>
+    <div className="flex min-h-screen items-center justify-center p-6">
+      <div className="w-full max-w-md">
+        <Card>
+          <CardHeader className="text-center">
+            <CardTitle className="text-2xl">Welcome!</CardTitle>
+            <CardDescription>
+              Get started with your account
+            </CardDescription>
+          </CardHeader>
+          <CardContent className="space-y-4">
+            <Button asChild className="w-full">
+              <Link href="/login">Sign In</Link>
+            </Button>
+            <Button asChild variant="outline" className="w-full">
+              <Link href="/register">Create Account</Link>
+            </Button>
+          </CardContent>
+          <CardFooter>
+          <Link href="/dashboard">Sahboard</Link>
+          </CardFooter>
+        </Card>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default page
+export default HomePage;

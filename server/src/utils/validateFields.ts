@@ -1,0 +1,52 @@
+export function validateRegisterFields({
+  fullName,
+  email,
+  password,
+}: {
+  fullName?: string;
+  email?: string;
+  password?: string;
+}) {
+  if (!fullName || !email || !password) {
+    return {
+      message: "Missing required fields",
+      error: "Full name, email, and password are required",
+    };
+  }
+  return null;
+}
+
+export function validateLoginFields({
+  email,
+  password,
+}: {
+  email?: string;
+  password?: string;
+}) {
+  if (!email || !password) {
+    return {
+      message: "Missing required fields",
+      error: "Email and password are required",
+    };
+  }
+  return null;
+}
+
+export function isValidEmail({ email }: { email: string }) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!emailRegex.test(email)) {
+    return {
+      message: "Invalid email format",
+      error: "Please provide a valid email address",
+    };
+  }
+  return null;
+}
+
+export function isValidPassword({ password }: { password: string }) {
+  return password && password.length >= 6 && password.length <= 32 ? null : {
+    message: "Invalid password length",
+    error: "Password must be between 6 and 32 characters long",
+  };
+  return null
+}
